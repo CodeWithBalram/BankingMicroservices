@@ -10,4 +10,5 @@ public interface CardsRepository extends JpaRepository<Cards, Long> {
 
     Optional<Cards> findByCardNumber(String cardNumber);
 
+    Cards save(Cards newCard);
 }
