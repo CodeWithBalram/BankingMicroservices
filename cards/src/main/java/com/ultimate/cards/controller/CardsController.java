@@ -39,7 +39,7 @@ public class CardsController {
                 .status(HttpStatus.OK)
                 .body(cardsDto);
     }
-
+@PutMapping("/update")
     public ResponseEntity<ResponseDto> updateCardDetails(@RequestParam CardsDto cardsDto) {
         boolean isUpdated = iCardsService.updateCard(cardsDto);
 
