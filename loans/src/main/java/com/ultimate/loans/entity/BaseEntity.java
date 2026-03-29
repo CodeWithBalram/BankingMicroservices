@@ -1,6 +1,5 @@
 package com.ultimate.loans.entity;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;

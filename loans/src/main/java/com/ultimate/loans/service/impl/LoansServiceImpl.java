@@ -1,8 +1,9 @@
 package com.ultimate.loans.service.impl;
 
-import com.ultimate.cards.exception.ResourceNotFoundException;import com.ultimate.loans.constants.LoansConstants;
+import com.ultimate.loans.constants.LoansConstants;
 import com.ultimate.loans.dto.LoansDto;import com.ultimate.loans.entity.Loans;
 import com.ultimate.loans.exception.LoanAlreadyExistsException;
+import com.ultimate.loans.exception.ResourceNotFoundException;
 import com.ultimate.loans.mapper.LoansMapper;import com.ultimate.loans.repository.LoansRepository;
 import com.ultimate.loans.service.ILoanService;
 import lombok.AllArgsConstructor;

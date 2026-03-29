@@ -1,8 +1,11 @@
 package com.ultimate.loans.dto;
 
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;import jakarta.validation.constraints.PositiveOrZero;import lombok.Data;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import lombok.Data;
 
 @Data
 public class LoansDto

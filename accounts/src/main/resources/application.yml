@@ -2,15 +2,16 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
-  h2:
-    console:
-      enabled: true
+    url: jdbc:mysql://localhost:3306/banking_project
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
+
+    jwt:
+      secret: mySuperSecureKey_mySuperSecureKey_123456
+      expiration: 1800000
