@@ -5,10 +5,10 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration // 👈 This makes it a configuration bean automatically
+@ConfigurationProperties(prefix="jwt")
 @Setter
 @Getter
-@ConfigurationProperties(prefix="jwt")
 public class JwtConfig
 {
     private String secret;

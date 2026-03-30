@@ -1,9 +1,9 @@
-server:
-  port: 8080
 
+server:
+  port: 8083
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/banking_project
+    url: jdbc:mysql://localhost:3306/user
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
@@ -15,4 +15,9 @@ spring:
 
 jwt:
   secret: mySuperSecureKey_mySuperSecureKey_123456
-  expiration: 3600000   # milliseconds (1 hour)
+  access-expiration: 36000000 # MATCHED TO YOUR JAVA VARIABLE
+
+security:
+  user:
+    name: ""
+    password: ""

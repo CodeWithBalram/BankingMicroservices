@@ -9,44 +9,81 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
+    // 🔹 Repository to interact with DB
     private final UserRepository userRepository;
+
+    // 🔹 Used to encrypt & match passwords
     private final PasswordEncoder passwordEncoder;
+
+    // 🔹 Used to generate JWT tokens
     private final JwtService jwtService;
 
-    // ✅ Register user and return JWT with role
+    /**
+     * ✅ REGISTER METHOD
+     * - Creates new user
+     * - Encrypts password
+     * - Saves to DB
+     * - Returns JWT token
+     */
     public AuthResponse register(AuthRequest request) {
+
+        // 1️⃣ Check if username already exists
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new RuntimeException("User already exists");
+        }
+
+        // 2️⃣ Create new user object
         User user = User.builder()
                 .username(request.getUsername())
+
+                // 🔐 Always encode password before saving
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role("ROLE_USER") // default role
+
+                // 👤 Default role assigned
+                .role("ROLE_USER")
                 .build();
-         userRepository.save(user);
-        // Use role-based JWT
-        String token = jwtService.generateTokenWithRole(user.getUsername(), user.getRole());
+
+        // 3️⃣ Save user in database
+        userRepository.save(user);
+
+        // 4️⃣ Generate JWT token (with role)
+        String token = jwtService.generateTokenWithRole(
+                user.getUsername(),
+                user.getRole()
+        );
+
+        // 5️⃣ Return token in response
         return new AuthResponse(token);
     }
 
-    // ✅ Login user and return JWT with role
+    /**
+     * ✅ LOGIN METHOD
+     * - Verifies user credentials
+     * - Matches password
+     * - Returns JWT token
+     */
     public AuthResponse login(AuthRequest request) {
-        Optional<User> userOpt = userRepository.findByUsername(request.getUsername());
 
-        if (!userOpt.isPresent()) {  // isEmpty() ki jagah isPresent() ka ! use karo
-            throw new RuntimeException("User not found");
-        }
+        // 1️⃣ Fetch user from DB
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        User user = userOpt.get();
-
+        // 2️⃣ Match raw password with encoded password
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = jwtService.generateToken(user.getUsername());
+        // 3️⃣ Generate JWT token (with role)
+        String token = jwtService.generateTokenWithRole(
+                user.getUsername(),
+                user.getRole()
+        );
+
+        // 4️⃣ Return token
         return new AuthResponse(token);
     }
 }
