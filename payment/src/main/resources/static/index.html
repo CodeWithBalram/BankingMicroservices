@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bank Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<h1>Bank Payment</h1>
+
+<form id="paymentForm">
+    <label>User ID:</label>
+    <input type="text" id="userId" value="user123" required /><br/><br/>
+
+    <label>Reference Type:</label>
+    <select id="referenceType">
+        <option value="LOAN">Loan</option>
+        <option value="CARD">Card</option>
+        <option value="ACCOUNT">Account</option>
+    </select><br/><br/>
+
+    <label>Reference ID:</label>
+    <input type="text" id="referenceId" value="loan001" required /><br/><br/>
+
+    <label>Amount (INR):</label>
+    <input type="number" id="amount" value="500" required /><br/><br/>
+
+    <button type="submit">Pay Now</button>
+</form>
+
+<script src="js/payment.js"></script>
+</body>
+</html>

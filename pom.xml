@@ -21,6 +21,7 @@
         <module>accounts</module>
         <module>cards</module>
         <module>loans</module>
+        <module>payment</module>
     </modules>
 
     <!-- Common Properties -->
